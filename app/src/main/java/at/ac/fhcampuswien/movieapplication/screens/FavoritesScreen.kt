@@ -19,11 +19,11 @@ import at.ac.fhcampuswien.movieapplication.widgets.SimpleTopAppBar
 @Composable
 fun FavoritesScreen(navController: NavController, viewModel: FavoritesViewModel){
     Scaffold(topBar = {
-        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
+        SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) { //bekommt die kleinere TopAppBar mit backarrow
             Text(text = "My Favorite Movies")
         }
     }){
-        MainContent(movieList = viewModel.favoriteMovies, navController = navController)
+        MainContent(movieList = viewModel.favoriteMovies, navController = navController) //die movielist die unten verwendet wird bekommt nur eine Liste von FavoriteMovies nicht mehr die ganze Liste
     }
 }
 
@@ -31,12 +31,12 @@ fun FavoritesScreen(navController: NavController, viewModel: FavoritesViewModel)
 fun MainContent(movieList: List<Movie>, navController: NavController){
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn {
-            items(items = movieList){ movie ->
+            items(items = movieList){ movie -> //Liste übergeben und wird dann unten in MovieRows angezeigt
                 MovieRow(
                     movie = movie,
                     onItemClick = {
                             item ->
-                        navController.navigate(route = MovieScreens.DetailScreen.name+"/$item")
+                        navController.navigate(route = MovieScreens.DetailScreen.name+"/$item") //on itemclick wird dann zum DetailScreen navigiert
                     }
                 )
             }

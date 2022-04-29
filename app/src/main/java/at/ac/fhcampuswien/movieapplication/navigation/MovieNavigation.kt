@@ -16,10 +16,11 @@ import at.ac.fhcampuswien.movieapplication.viewmodels.FavoritesViewModel
 fun MovieNavigation(){
     val navController = rememberNavController() // create NavController instance
 
-    val favoritesViewModel: FavoritesViewModel = viewModel()
+    val favoritesViewModel: FavoritesViewModel = viewModel() //weil alle Screens auf Navigation zugriff haben wird hier viemodel definiert
+    //hier wird eine favoritesViewModel definiert die dann bei allen eingefügt wird
 
-    NavHost(navController = navController, startDestination = MovieScreens.HomeScreen.name){
-        composable(route = MovieScreens.HomeScreen.name) {
+    NavHost(navController = navController, startDestination = MovieScreens.HomeScreen.name){ //Container von Screens
+        composable(route = MovieScreens.HomeScreen.name) { //Name (steht in der enum Class) zu Composable assignen
             HomeScreen(navController, favoritesViewModel)
         }
 
@@ -30,7 +31,7 @@ fun MovieNavigation(){
         composable(
             route = MovieScreens.DetailScreen.name+"/{movieId}",// placeholder for arguments
             arguments = listOf(navArgument(name = "movieId"){   // define arguments that can be passed
-                type = NavType.StringType
+                type = NavType.StringType //definiere Typ vom argument
             })) { navBackStackEntry ->
 
             DetailScreen(

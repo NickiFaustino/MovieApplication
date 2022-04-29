@@ -21,11 +21,11 @@ fun filterMovie(movieId: String?): Movie {
 
 @Composable
 fun DetailScreen(navController: NavController, favoritesViewModel: FavoritesViewModel, movieId: String?){
-    val movie = filterMovie(movieId = movieId)
+    val movie = filterMovie(movieId = movieId) //variable movie wird ein Movie assigned was die gleiche ID hat wie die die gepassed wurde
 
     Scaffold(
         topBar = {
-            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) {
+            SimpleTopAppBar(arrowBackClicked = { navController.popBackStack() }) { //popbackstack um zum vorherigen Screen zu kommen
                 Text(text = movie.title)
             }
         }
@@ -48,7 +48,7 @@ fun MainContent(movie: Movie, favoritesViewModel: FavoritesViewModel){
         ) {
 
             MovieRow(movie = movie) {
-                FavoriteIcon(
+                FavoriteIcon( //gleich wie in HomeScreen
                     movie = movie,
                     isFav = favoritesViewModel.isFavorite(movie)
                 ){ m ->
@@ -66,7 +66,7 @@ fun MainContent(movie: Movie, favoritesViewModel: FavoritesViewModel){
 
             Text(text = "Movie Images", style = MaterialTheme.typography.h5)
 
-            HorizontalScrollableImageView(movie = movie)
+            HorizontalScrollableImageView(movie = movie) //Scrollable von MovieWidgets.kt
         }
     }
 }

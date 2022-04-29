@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SimpleTopAppBar(arrowBackClicked: () -> Unit = {}, content: @Composable () -> Unit){
+fun SimpleTopAppBar(arrowBackClicked: () -> Unit = {}, content: @Composable () -> Unit){ //Klasse für eine kleinere Topappbar mit arrowback für Screens außer Home
     TopAppBar(elevation = 3.dp) {
         Row {
             Icon(imageVector = Icons.Default.ArrowBack,

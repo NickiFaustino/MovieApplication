@@ -36,7 +36,7 @@ fun HomeScreen(navController: NavController, viewModel: FavoritesViewModel){
                     expanded = showMenu,
                     onDismissRequest = { showMenu = false }
                 ) {
-                    DropdownMenuItem(onClick = { navController.navigate(route = MovieScreens.FavoritesScreen.name) }) {
+                    DropdownMenuItem(onClick = { navController.navigate(route = MovieScreens.FavoritesScreen.name) }) { //navigation zum FavoriteScreen
                         Row(modifier = Modifier.clickable { navController.navigate(MovieScreens.FavoritesScreen.name) }) {
                             Icon(imageVector = Icons.Default.Favorite, contentDescription = "Favorites", modifier = Modifier.padding(4.dp))
                             Text(text = "Favorites", modifier = Modifier
@@ -48,8 +48,8 @@ fun HomeScreen(navController: NavController, viewModel: FavoritesViewModel){
             }
         )
     }) {
-        MainContent(navController = navController, favoritesViewModel = viewModel)
-    }
+        MainContent(navController = navController, favoritesViewModel = viewModel) //hier bekommt MainContent seinen NavController für die navigation zum DetailScreen
+    } //und sein viewModel er bekommt alles vom HomeScreen
 }
 
 @Composable
@@ -60,13 +60,13 @@ fun MainContent(navController: NavController, favoritesViewModel: FavoritesViewM
                 movie = movie,
                 onItemClick = { movieId -> navController.navigate(MovieScreens.DetailScreen.name+"/$movieId")}
             ) {
-                FavoriteIcon(
-                    movie = movie,
-                    isFav = favoritesViewModel.isFavorite(movie)
-                ){ m ->
-                    if(favoritesViewModel.isFavorite(m)){
+                FavoriteIcon( //hier wird dann favoriteIcon aufgerufen welches sich im MovieWidgets befindet
+                    movie = movie, //movie von oben wird assigned
+                    isFav = favoritesViewModel.isFavorite(movie) //hier wird jetzt eine Funktion vom FavoritesViewModel verwendet die isFavorite Methode *im FavoriteViewModel schauen
+                ){ m -> //hier wird dem FavoriteIcon eine Funktion hinzugefügt
+                    if(favoritesViewModel.isFavorite(m)){ //wenn es schon ein favorite ist dann remove es
                         favoritesViewModel.removeFromFavorites(m)
-                    } else {
+                    } else { //wenn es noch kein favorite ist dann add es
                         favoritesViewModel.addToFavorites(m)
                     }
                 }

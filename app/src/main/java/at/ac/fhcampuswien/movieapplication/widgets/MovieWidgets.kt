@@ -31,20 +31,20 @@ import coil.request.ImageRequest
 
 @Preview(showBackground = true)
 @Composable
-fun FavoriteIcon(
+fun FavoriteIcon( //wird ein movie übergeben, ein boolean isFav und eine Funktion onFavCklicked die das gecklickte movie speichert
     movie: Movie = getMovies()[0],
     isFav: Boolean = false,
     onFavClicked: (Movie) -> Unit = {},
 ){
     IconButton(
         modifier = Modifier.width(80.dp),
-        onClick = { onFavClicked(movie) }
+        onClick = { onFavClicked(movie) } //hier wird der onFavClicked Funktion die movie Variable von oben übergeben
     ) {
         Icon(
             tint = MaterialTheme.colors.secondary,
             imageVector =
-            if (isFav) Icons.Default.Favorite
-            else Icons.Default.FavoriteBorder,
+            if (isFav) Icons.Default.Favorite //if isFav is true also wenn es geclicked wird --> mache volles Herz
+            else Icons.Default.FavoriteBorder, //wenn false dann mach border style
             contentDescription = "add to favorites")
     }
 }
